@@ -1,0 +1,12 @@
+html {
+  background: url('./Grassy\ Plain.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.bg {
+  background-color: lightblue; /* For browsers that do not support gradients */
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(51, 198, 247),
+    rgb(52, 165, 52)
+  );
+}
