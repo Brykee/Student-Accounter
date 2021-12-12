@@ -10,3 +10,11 @@ html {
     rgb(52, 165, 52)
   );
 }
+
+.App {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(160, 231, 255),
+    rgb(28, 112, 190)
+  );
+}

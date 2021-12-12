@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navigation() {
   const [setError] = useState('');
   const { logout } = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   async function handleLogout() {
-    // setError('');
-
     try {
       await logout();
-      history.push('/login');
+      navigate('/login');
     } catch {
       setError('Failed to log out');
     }
