@@ -11,8 +11,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { login } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export default function Login() {
     try {
       setError('');
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(email, password);
       navigate('/');
     } catch {
       setError('Failed to log in');
@@ -42,11 +42,19 @@ export default function Login() {
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <FormLabel>Email</FormLabel>
-              <FormControl type="email" ref={emailRef} required />
+              <FormControl
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </Form.Group>
             <Form.Group id="password">
               <FormLabel>Password</FormLabel>
-              <FormControl type="password" ref={passwordRef} required />
+              <FormControl
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </Form.Group>
             <br />
             <Button disable={loading} className="w-100" type="submit">
