@@ -1,26 +1,27 @@
 jest.mock('../../firebase.js', () => ({
-  auth: { onAuthStateChanged: jest.fn((x) => x()) },
+  auth: {
+    onAuthStateChanged: (callback) => callback({ email: 'test@gmail.com' }),
+  },
 }));
-jest.mock('react-router-dom');
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(),
+  Link: ({ children }) => <div>{children}</div>,
+}));
+import React from 'react';
 import Login from '../Login';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import { AuthContext, AuthProvider } from '../../contexts/AuthContext';
+import '@testing-library/jest-dom';
+import { render, waitFor, screen } from '@testing-library/react';
+import { AuthProvider } from '../../contexts/AuthContext';
 describe('Login', () => {
-  const mockedFunctions = {
-    login: jest.fn(),
-    signup: jest.fn(),
-    logout: jest.fn(),
-    resetPassword: jest.fn(),
-    updateEmail: jest.fn(),
-    updatePassword: jest.fn(),
-  };
-  test('should render login page', async () => {
+  it('should render login page', async () => {
     render(
-      <AuthContext.Provider value={jest.fn()}>
+      <AuthProvider>
         <Login />
-      </AuthContext.Provider>
+      </AuthProvider>
     );
-    const emailLabel = screen.getByText('Email');
-    expect(emailLabel).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText('Email')).toBeInTheDocument();
+    });
   });
 });
