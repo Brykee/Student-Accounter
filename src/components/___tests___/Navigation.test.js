@@ -8,20 +8,20 @@ jest.mock('react-router-dom', () => ({
   Link: ({ children }) => <div>{children}</div>,
 }));
 import React from 'react';
+import Navigation from '../Navigation';
 import '@testing-library/jest-dom';
 import { render, waitFor, screen } from '@testing-library/react';
 import { AuthProvider } from '../../contexts/AuthContext';
-import UpdateProfile from '../UpdateProfile';
-describe('Update Profile', () => {
-  it('should render Update Profile page', async () => {
+describe('Navigation', () => {
+  it('should render the Navigation', async () => {
     render(
       <AuthProvider>
-        <UpdateProfile />
+        <Navigation />
       </AuthProvider>
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Cancel')).toBeInTheDocument();
+      expect(screen.getByText('Student Accounter')).toBeInTheDocument();
     });
   });
 });

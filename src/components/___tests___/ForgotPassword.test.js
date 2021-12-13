@@ -11,17 +11,17 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, waitFor, screen } from '@testing-library/react';
 import { AuthProvider } from '../../contexts/AuthContext';
-import UpdateProfile from '../UpdateProfile';
-describe('Update Profile', () => {
-  it('should render Update Profile page', async () => {
+import ForgotPassword from '../ForgotPassword';
+describe('ForgotPassword', () => {
+  it('should render the Forgot Password page', async () => {
     render(
       <AuthProvider>
-        <UpdateProfile />
+        <ForgotPassword />
       </AuthProvider>
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Cancel')).toBeInTheDocument();
+      expect(screen.getByText('Email')).toBeInTheDocument();
     });
   });
 });
